@@ -1,0 +1,316 @@
+:root {
+  /* פלטת צבעים קיצית ורעננה - ללא פיקסלים */
+  --primary: #00cec9;       
+  --primary-dark: #00b5b1;
+  --secondary: #ff7675;      
+  --accent: #fab1a0;         
+  --sun: #fdcb6e;            
+  --danger: #ff4757;
+  --success: #2ecc71;
+  --bg: #f0f9ff;             
+  --radius: 1rem;            
+  --disabled: #dfe6e9;
+  --locked-bg: #f1f2f6;
+  --locked-text: #636e72;
+  --overlay: rgba(45, 52, 54, 0.85);
+  --shadow: 0 0.6rem 1.5rem rgba(0, 0, 0, 0.08);
+}
+
+body {
+  direction: rtl;
+  background-color: var(--bg);
+  /* טקסטורה עדינה שמרגישה כמו ים ושמש */
+  background-image: radial-gradient(circle at 20% 20%, rgba(253, 203, 110, 0.1) 0%, transparent 25%),
+                    radial-gradient(circle at 80% 80%, rgba(0, 206, 201, 0.05) 0%, transparent 25%);
+  font-family: 'Assistant', 'Segoe UI', sans-serif;
+  margin: 0;
+  font-size: 1rem; /* בסיס של 16px שמשתנה לפי הגדרות המשתמש */
+  line-height: 1.6;
+  color: #2d3436;
+  min-height: 100vh;
+}
+
+.form-container {
+  width: 92vw;
+  max-width: 38rem;
+  margin: 2rem auto;
+  background: white;
+  padding: 2rem;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  /* עובי הפס העליון גם הוא ב-rem */
+  border-top: 0.5rem solid var(--sun);
+  animation: fadeInUp 0.5s ease-out;
+  position: relative; /* מאפשר מיקום אלמנטים פנימיים */
+}
+
+h2, h3 {
+  color: var(--primary-dark);
+  text-align: center;
+  margin-bottom: 1.5rem;
+  font-weight: 800;
+  font-size: 1.5rem;
+}
+
+/* --- תוספת: מונה אחים בצד שמאל למעלה --- */
+.sibling-status-header {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  position: absolute;
+  top: 1rem;
+  left: 1.5rem;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--primary-dark);
+  background: rgba(0, 206, 201, 0.05);
+  padding: 0.4rem 0.8rem;
+  border-radius: 0.5rem;
+  border: 0.06rem solid rgba(0, 206, 201, 0.1);
+}
+
+.cancel-link {
+  background: none;
+  border: none;
+  color: var(--secondary);
+  font-size: 0.75rem;
+  cursor: pointer;
+  padding: 0;
+  text-decoration: underline;
+  margin-top: 0.2rem;
+}
+
+/* מבנה הטופס - Grid גמיש */
+.grid-form {
+  display: grid;
+  grid-template-columns: 1fr 2.2fr;
+  gap: 1rem 1.5rem;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.grid-form label {
+  font-weight: 700;
+  font-size: 0.95rem;
+  color: #57606f;
+}
+
+/* שדות קלט - הכל ב-rem */
+input, select, textarea {
+  width: 100%;
+  padding: 0.8rem;
+  /* שימוש ב-rem גם למסגרות קטנות */
+  border: 0.125rem solid #edf2f7; 
+  border-radius: var(--radius);
+  box-sizing: border-box;
+  font-size: 1rem;
+  font-family: inherit;
+  transition: all 0.3s ease;
+  background-color: #fdfdfd;
+}
+
+input:focus, select:focus, textarea:focus {
+  outline: none;
+  border-color: var(--primary);
+  background-color: white;
+  box-shadow: 0 0 0 0.25rem rgba(0, 206, 201, 0.15);
+}
+
+/* --- תוספת: שדות שגיאה באדום --- */
+.input-error {
+  border-color: var(--danger) !important;
+  background-color: #fff5f5 !important;
+}
+
+/* שדות נעולים/קריאה בלבד */
+.input-locked, .readonly-value {
+  background-color: var(--locked-bg) !important;
+  color: var(--locked-text) !important;
+  cursor: not-allowed;
+  border: 0.125rem solid #d1d8e0;
+  font-weight: 600;
+}
+
+.readonly-value {
+  padding: 0.8rem;
+  display: flex;
+  align-items: center;
+  min-height: 1.2rem;
+}
+
+/* כפתורים */
+.btn-row { 
+  display: flex; 
+  gap: 1rem; 
+  margin-top: 2rem; 
+}
+
+.main-btn, .next-btn, .save-btn, .success-btn, .back-btn, .pay-btn, .sibling-btn {
+  border: none;
+  padding: 1rem;
+  border-radius: var(--radius);
+  font-weight: 800;
+  cursor: pointer;
+  font-size: 1.1rem;
+  transition: all 0.2s ease;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-decoration: none;
+}
+
+/* אפקט ריחוף עדין */
+.main-btn:hover, .next-btn:hover {
+  transform: translateY(-0.15rem);
+  filter: brightness(1.05);
+  box-shadow: 0 0.4rem 1rem rgba(0, 206, 201, 0.2);
+}
+
+.main-btn, .next-btn, .save-btn { background: linear-gradient(135deg, var(--primary), var(--primary-dark)); color: white; width: 100%; }
+.success-btn, .pay-btn { background: linear-gradient(135deg, var(--success), #27ae60); color: white; width: 100%; }
+.back-btn { background-color: white; color: #a4b0be; border: 0.125rem solid #dfe6e9; flex: 1; }
+.sibling-btn { background-color: white; color: var(--secondary); border: 0.125rem solid var(--secondary); flex: 1; }
+
+/* --- תוספת: באנרים של הודעות --- */
+.error-banner {
+  background-color: #fff5f5;
+  color: var(--danger);
+  padding: 1rem;
+  border-radius: 0.5rem;
+  border-right: 0.3rem solid var(--danger);
+  margin-bottom: 1.5rem;
+  font-weight: 700;
+  animation: shake 0.4s ease-in-out;
+}
+
+.success-banner {
+  background-color: #f0fff4;
+  color: var(--success);
+  padding: 1rem;
+  border-radius: 0.5rem;
+  border-right: 0.3rem solid var(--success);
+  margin-bottom: 1.5rem;
+  font-weight: 700;
+}
+
+/* הודעות חשובות */
+.health-notice {
+  background-color: #fff9db;
+  color: #856404;
+  padding: 1rem;
+  border-right: 0.3rem solid var(--sun);
+  border-radius: 0.5rem;
+  font-size: 0.9rem;
+  margin-bottom: 1.5rem;
+}
+
+/* סיכום תשלום */
+.summary-details {
+  background: linear-gradient(to bottom, #ffffff, #f0fffe);
+  padding: 1.5rem;
+  border-radius: var(--radius);
+  margin-bottom: 1.5rem;
+  border: 0.06rem solid var(--accent);
+}
+
+.summary-details p {
+  margin: 0.8rem 0;
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 0.06rem dashed rgba(0,0,0,0.05);
+  padding-bottom: 0.5rem;
+}
+
+.balance-due {
+  color: var(--danger);
+  font-size: 1.5rem;
+  font-weight: 900;
+  border-bottom: none !important;
+  background: #fff5f5;
+  padding: 1rem !important;
+  border-radius: 0.5rem;
+}
+
+/* מונה תווים */
+.char-counter {
+  font-size: 0.75rem;
+  color: #a4b0be;
+  text-align: left;
+  margin-top: 0.2rem;
+}
+
+/* --- תוספת חדשה: עיצוב הפלייר המאוחד --- */
+.flyer-container {
+  width: 100%;
+  margin-bottom: 2rem;
+  display: flex;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.flyer-image {
+  width: 100%;
+  max-width: 32rem; /* גודל אופטימלי לקריאה גם במחשב וגם בטאבלט */
+  height: auto;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  display: block;
+  transition: transform 0.3s ease;
+}
+
+.flyer-image:hover {
+  transform: scale(1.01); /* אפקט הגדלה עדין בריחוף עכבר */
+}
+
+/* אנימציות */
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(1.5rem); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(0.3rem); }
+  75% { transform: translateX(-0.3rem); }
+}
+
+/* רספונסיביות מלאה למובייל */
+@media (max-width: 40rem) {
+  .grid-form {
+    grid-template-columns: 1fr;
+    gap: 0.5rem;
+  }
+  
+  .form-container {
+    width: 100%;
+    margin: 0;
+    border-radius: 0;
+    padding: 1.2rem;
+    border-top-width: 0.75rem;
+  }
+
+  .sibling-status-header {
+    position: static;
+    margin-bottom: 1rem;
+    align-items: center;
+  }
+
+  .btn-row {
+    flex-direction: column;
+  }
+
+  /* סידור כפתורים במובייל */
+  .back-btn { order: 3; }
+  .sibling-btn { order: 2; }
+  .next-btn, .main-btn { order: 1; }
+
+  /* התאמת פלייר למובייל - ביטול צל כבד וריווח צפוף יותר */
+  .flyer-container {
+    margin-bottom: 1.5rem;
+  }
+  
+  .flyer-image {
+    max-width: 100%;
+    border-radius: 0.5rem; /* עיגול עדין יותר במסכים קטנים */
+  }
+}
